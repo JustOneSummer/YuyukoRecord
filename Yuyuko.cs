@@ -129,7 +129,6 @@ namespace YuyukoRecord
             GAME_DATA.One.Sort();
             GAME_DATA.Two.Sort();
             TableUtils.LoadGame(dataGridViewOne, GAME_DATA);
-            ReLoadToolStripMenuItem.Enabled = true;
         }
 
 
@@ -201,8 +200,8 @@ namespace YuyukoRecord
 
         private void DefaultToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Width = 1600;
-            Height = 836;
+            Width = 1500;
+            Height = 1010;
             TableUtils.Hw(dataGridViewOne);
         }
 
@@ -317,6 +316,7 @@ namespace YuyukoRecord
                               labelMyTwo.Text = SpTwo(avgTwo.AvgPr(), avgTwo.Battle, avgTwo.AvgWins());
                               labelDataStatus.Text = "计算完成...";
                               contextMenuStrip1.Enabled = true;
+                              ReLoadToolStripMenuItem.Enabled = true;
                           }
                       }
                   }catch (Exception ex)
@@ -384,13 +384,13 @@ namespace YuyukoRecord
                     {
                         //获取友方数据
                         v = dataGridViewOne.Rows[e.RowIndex].Cells[0].Value.ToString();
-                        MENU_SHIP_NAME = dataGridViewOne.Rows[e.RowIndex].Cells[4].Value.ToString();
+                        MENU_SHIP_NAME = dataGridViewOne.Rows[e.RowIndex].Cells[3].Value.ToString();
                     }
                     else if (e.ColumnIndex >= 8)
                     {
                         //获取敌方
                         v = dataGridViewOne.Rows[e.RowIndex].Cells[13].Value.ToString();
-                        MENU_SHIP_NAME = dataGridViewOne.Rows[e.RowIndex].Cells[11].Value.ToString();
+                        MENU_SHIP_NAME = dataGridViewOne.Rows[e.RowIndex].Cells[10].Value.ToString();
                     }
                     else
                     {
@@ -436,7 +436,7 @@ namespace YuyukoRecord
                             builder.Append(user.Ship.Battles).Append("场").Append(TableTemplate.RN);
                             builder.Append("胜率:").Append(user.Ship.Wins).Append("%").Append(TableTemplate.RN);
                             builder.Append("场均:").Append(user.Ship.Damage).Append(TableTemplate.RN);
-                            builder.Append("PR:").Append(user.Ship.Pr).Append(TableTemplate.RN);
+                            builder.Append("PR(评分)=").Append(user.Ship.Pr).Append(TableTemplate.RN);
                         }
                         string data = builder.ToString();
                         log.Info("复制内容:" + data);

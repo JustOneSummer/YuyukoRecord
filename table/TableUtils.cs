@@ -75,9 +75,9 @@ namespace YuyukoRecord.table
             //view.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             view.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             view.AllowUserToAddRows = false;
-            view.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //view.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             view.ClearSelection();
-            view.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            //view.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             Hw(view);
         }
 
@@ -91,7 +91,7 @@ namespace YuyukoRecord.table
             view.Columns[0].FillWeight = 30;
             view.Columns[1].FillWeight = 10;
             view.Columns[2].FillWeight = 8;
-            view.Columns[3].FillWeight = 16;
+            view.Columns[3].FillWeight = 14;
             view.Columns[4].FillWeight = 10;
             view.Columns[5].FillWeight = 8;
             view.Columns[6].FillWeight = 8;
@@ -99,7 +99,7 @@ namespace YuyukoRecord.table
             view.Columns[7].FillWeight = 8;
             view.Columns[8].FillWeight = 8;
             view.Columns[9].FillWeight = 10;
-            view.Columns[10].FillWeight = 16;
+            view.Columns[10].FillWeight = 14;
             view.Columns[11].FillWeight = 8;
             view.Columns[12].FillWeight = 10;
             view.Columns[13].FillWeight = 30;
@@ -113,6 +113,7 @@ namespace YuyukoRecord.table
             for (int i = 0; i < view.Rows.Count; i++)
             {
                 view.Rows[i].Height = 70;
+                view.Rows[i].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 if (i == 0)
                 {
                     view.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(Convert.ToInt32("ffF8F8FF", 16));

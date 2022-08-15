@@ -53,6 +53,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.labelMyOne = new System.Windows.Forms.Label();
             this.labelMyTwo = new System.Windows.Forms.Label();
+            this.ColorTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOne)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -84,7 +86,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(1309, 37);
+            this.label2.Location = new System.Drawing.Point(1209, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 21);
             this.label2.TabIndex = 2;
@@ -96,7 +98,7 @@
             this.labelGameTime.AutoSize = true;
             this.labelGameTime.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelGameTime.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.labelGameTime.Location = new System.Drawing.Point(1405, 37);
+            this.labelGameTime.Location = new System.Drawing.Point(1305, 37);
             this.labelGameTime.Name = "labelGameTime";
             this.labelGameTime.Size = new System.Drawing.Size(163, 21);
             this.labelGameTime.TabIndex = 3;
@@ -108,7 +110,7 @@
             this.labelDataStatus.AutoSize = true;
             this.labelDataStatus.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelDataStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.labelDataStatus.Location = new System.Drawing.Point(1185, 37);
+            this.labelDataStatus.Location = new System.Drawing.Point(1085, 37);
             this.labelDataStatus.Name = "labelDataStatus";
             this.labelDataStatus.Size = new System.Drawing.Size(118, 21);
             this.labelDataStatus.TabIndex = 4;
@@ -137,7 +139,7 @@
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataGridViewOne.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewOne.RowTemplate.Height = 23;
-            this.dataGridViewOne.Size = new System.Drawing.Size(1560, 704);
+            this.dataGridViewOne.Size = new System.Drawing.Size(1460, 878);
             this.dataGridViewOne.TabIndex = 5;
             this.dataGridViewOne.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewOne_CellMouseDown);
             this.dataGridViewOne.SelectionChanged += new System.EventHandler(this.dataGridViewOne_SelectionChanged);
@@ -176,7 +178,7 @@
             this.ExeLogToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1584, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(1484, 27);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -184,7 +186,9 @@
             // 
             this.SheZhiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SetGamePathToolStripMenuItem,
-            this.UpdateSorToolStripMenuItem});
+            this.UpdateSorToolStripMenuItem,
+            this.ColorTemplateToolStripMenuItem,
+            this.ImageToolStripMenuItem});
             this.SheZhiToolStripMenuItem.Name = "SheZhiToolStripMenuItem";
             this.SheZhiToolStripMenuItem.Size = new System.Drawing.Size(47, 23);
             this.SheZhiToolStripMenuItem.Text = "设置";
@@ -192,14 +196,14 @@
             // SetGamePathToolStripMenuItem
             // 
             this.SetGamePathToolStripMenuItem.Name = "SetGamePathToolStripMenuItem";
-            this.SetGamePathToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
+            this.SetGamePathToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.SetGamePathToolStripMenuItem.Text = "设置游戏路径";
             this.SetGamePathToolStripMenuItem.Click += new System.EventHandler(this.SetGamePathToolStripMenuItem_Click);
             // 
             // UpdateSorToolStripMenuItem
             // 
             this.UpdateSorToolStripMenuItem.Name = "UpdateSorToolStripMenuItem";
-            this.UpdateSorToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
+            this.UpdateSorToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.UpdateSorToolStripMenuItem.Text = "更新资源文件";
             this.UpdateSorToolStripMenuItem.Click += new System.EventHandler(this.UpdateSorToolStripMenuItem_Click);
             // 
@@ -248,7 +252,7 @@
             this.labelMyOne.AutoSize = true;
             this.labelMyOne.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelMyOne.ForeColor = System.Drawing.Color.Green;
-            this.labelMyOne.Location = new System.Drawing.Point(537, 53);
+            this.labelMyOne.Location = new System.Drawing.Point(475, 53);
             this.labelMyOne.Name = "labelMyOne";
             this.labelMyOne.Size = new System.Drawing.Size(69, 25);
             this.labelMyOne.TabIndex = 7;
@@ -260,17 +264,29 @@
             this.labelMyTwo.AutoSize = true;
             this.labelMyTwo.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelMyTwo.ForeColor = System.Drawing.Color.Firebrick;
-            this.labelMyTwo.Location = new System.Drawing.Point(806, 53);
+            this.labelMyTwo.Location = new System.Drawing.Point(787, 53);
             this.labelMyTwo.Name = "labelMyTwo";
             this.labelMyTwo.Size = new System.Drawing.Size(69, 25);
             this.labelMyTwo.TabIndex = 8;
             this.labelMyTwo.Text = "敌方：";
             // 
+            // ColorTemplateToolStripMenuItem
+            // 
+            this.ColorTemplateToolStripMenuItem.Name = "ColorTemplateToolStripMenuItem";
+            this.ColorTemplateToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.ColorTemplateToolStripMenuItem.Text = "颜色模板";
+            // 
+            // ImageToolStripMenuItem
+            // 
+            this.ImageToolStripMenuItem.Name = "ImageToolStripMenuItem";
+            this.ImageToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.ImageToolStripMenuItem.Text = "自定义图片";
+            // 
             // Yuyuko
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1584, 797);
+            this.ClientSize = new System.Drawing.Size(1484, 971);
             this.Controls.Add(this.labelMyTwo);
             this.Controls.Add(this.labelMyOne);
             this.Controls.Add(this.dataGridViewOne);
@@ -319,6 +335,8 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem CopyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem OpenViewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ColorTemplateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ImageToolStripMenuItem;
     }
 }
 
