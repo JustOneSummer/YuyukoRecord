@@ -21,7 +21,8 @@ namespace YuyukoRecord.mq
         public static MqttClient Init()
         {
             string[] url = MQ_URL.Split(':');
-            MqttClient client = new MqttClient(url[0], int.Parse(url[1]), false, null, null, MqttSslProtocols.None);
+            MqttClient client = new MqttClient(url[0], int.Parse(url[1]), false, null, null, MqttSslProtocols.TLSv1_2);
+            client.ProtocolVersion = MqttProtocolVersion.Version_3_1_1;
             byte status = Connect(client);
             log.Info("初始化连接状态=" + status);
             return client;
