@@ -59,7 +59,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label2.Location = new System.Drawing.Point(187, 101);
+            this.label2.Location = new System.Drawing.Point(183, 101);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 22);
             this.label2.TabIndex = 2;
@@ -75,6 +75,7 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UpdateFile";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UpdateFile";
             this.Load += new System.EventHandler(this.UpdateFile_Load);
             this.ResumeLayout(false);

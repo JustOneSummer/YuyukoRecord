@@ -2,8 +2,10 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Text;
+using YuyukoRecord.config;
 
 namespace YuyukoRecord.game
 {
@@ -40,6 +42,19 @@ namespace YuyukoRecord.game
                 }
             }
             return PR_LIST[PR_LIST.Count - 1];
+        }
+
+        public static Image GetImage(PrCache pr)
+        {
+            if (AppConfigUtils.Instance.ShipImage)
+            {
+                string path = System.Environment.CurrentDirectory + "\\template\\pr\\PR_" + pr.Code + ".jpg";
+                if (File.Exists(path))
+                {
+                    return Image.FromFile(path);
+                }
+            }
+            return null;
         }
 
         public int CompareTo(PrCache other)

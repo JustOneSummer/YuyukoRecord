@@ -9,6 +9,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Threading;
 using uPLibrary.Networking.M2Mqtt;
+using YuyukoRecord.config;
 using YuyukoRecord.game;
 using YuyukoRecord.game.data;
 using YuyukoRecord.mq;
@@ -52,6 +53,8 @@ namespace YuyukoRecord
             PrCache.Http();
             log.Info("加载ship信息...");
             ShipCache.Http();
+            log.Info("加载配置信息...");
+            AppConfigUtils.LoadInit();
             ClientMqInit();
             string v = SourcesLoad.LoadGamePath();
             if (string.IsNullOrEmpty(v))
@@ -66,7 +69,6 @@ namespace YuyukoRecord
                 //开始监听文件
                 FileEvent();
             }
-            timer1.Enabled = true;
         }
 
         private void FileEvent()
@@ -171,7 +173,7 @@ namespace YuyukoRecord
         /// <param name="e"></param>
         private void SetGamePathToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GamePathSet home = new GamePathSet();
+            ConfigGamePath home = new ConfigGamePath();
             home.ShowDialog();
         }
 
@@ -247,7 +249,7 @@ namespace YuyukoRecord
 
         public void Subscribe()
         {
-            
+
             string[] topic = new string[] { MqttUtils.TOPIC_POLL_REAL };
             byte[] qos = new byte[] { 2 };
             log.Info("订阅数据=" + MqttUtils.TOPIC_POLL_REAL);
@@ -271,6 +273,10 @@ namespace YuyukoRecord
         public void ClientMqInit()
         {
             mqttClient = MqttUtils.Init();
+            /*           mqttClient.ConnectionClosed += (s, e) => this.Dispatcher.Invoke(new Action(() =>
+                        {
+
+                        }));*/
             log.Info("初始化mq客户端 id=" + MqttUtils.CLIENT_ID);
             mqttClient.MqttMsgPublishReceived += (s, e) => Dispatcher.Invoke(new Action(() =>
               {
@@ -319,12 +325,14 @@ namespace YuyukoRecord
                               ReLoadToolStripMenuItem.Enabled = true;
                           }
                       }
-                  }catch (Exception ex)
+                  }
+                  catch (Exception ex)
                   {
-                      log.Error("处理订阅数据异常!"+e.Topic+" err="+ex);
+                      log.Error("处理订阅数据异常!" + e.Topic + " err=" + ex);
                   }
               }));
             Subscribe();
+            timer1.Enabled = true;
         }
 
         public static string SpOne(int pr, int battle, double wins)
@@ -353,17 +361,14 @@ namespace YuyukoRecord
         {
             if (mqttClient != null)
             {
-                mqttClient.Disconnect();
-            }
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (!mqttClient.IsConnected)
-            {
-                byte status = MqttUtils.Connect(mqttClient);
-                log.Info("mqtt 重连状态..." + status);
-                Subscribe();
+                try
+                {
+                    mqttClient.Disconnect();
+                }
+                catch (Exception ex)
+                {
+                    log.Error("mqtt退出异常!" + ex);
+                }
             }
         }
 
@@ -468,6 +473,22 @@ namespace YuyukoRecord
             catch (Exception ex)
             {
                 log.Error("打开浏览器异常! " + ex);
+            }
+        }
+
+        private void ImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigImage image = new ConfigImage();
+            image.ShowDialog();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (mqttClient != null && !mqttClient.IsConnected)
+            {
+                byte status = MqttUtils.Connect(mqttClient);
+                log.Info("mqtt 重连状态..." + status);
+                Subscribe();
             }
         }
     }

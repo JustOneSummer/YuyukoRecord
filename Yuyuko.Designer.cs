@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Yuyuko));
             this.label1 = new System.Windows.Forms.Label();
             this.labelServer = new System.Windows.Forms.Label();
@@ -45,16 +45,16 @@
             this.SheZhiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SetGamePathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UpdateSorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ColorTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReplayPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReLoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExeLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.labelMyOne = new System.Windows.Forms.Label();
             this.labelMyTwo = new System.Windows.Forms.Label();
-            this.ColorTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOne)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -123,21 +123,21 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewOne.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dataGridViewOne.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewOne.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewOne.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewOne.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewOne.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridViewOne.Location = new System.Drawing.Point(12, 81);
             this.dataGridViewOne.Name = "dataGridViewOne";
             this.dataGridViewOne.ReadOnly = true;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridViewOne.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridViewOne.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewOne.RowTemplate.Height = 23;
             this.dataGridViewOne.Size = new System.Drawing.Size(1460, 878);
             this.dataGridViewOne.TabIndex = 5;
@@ -207,6 +207,19 @@
             this.UpdateSorToolStripMenuItem.Text = "更新资源文件";
             this.UpdateSorToolStripMenuItem.Click += new System.EventHandler(this.UpdateSorToolStripMenuItem_Click);
             // 
+            // ColorTemplateToolStripMenuItem
+            // 
+            this.ColorTemplateToolStripMenuItem.Name = "ColorTemplateToolStripMenuItem";
+            this.ColorTemplateToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.ColorTemplateToolStripMenuItem.Text = "颜色模板";
+            // 
+            // ImageToolStripMenuItem
+            // 
+            this.ImageToolStripMenuItem.Name = "ImageToolStripMenuItem";
+            this.ImageToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.ImageToolStripMenuItem.Text = "自定义图片";
+            this.ImageToolStripMenuItem.Click += new System.EventHandler(this.ImageToolStripMenuItem_Click);
+            // 
             // ReplayPathToolStripMenuItem
             // 
             this.ReplayPathToolStripMenuItem.Name = "ReplayPathToolStripMenuItem";
@@ -242,11 +255,6 @@
             this.ExeLogToolStripMenuItem.Text = "程序日志";
             this.ExeLogToolStripMenuItem.Click += new System.EventHandler(this.ExeLogToolStripMenuItem_Click);
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // labelMyOne
             // 
             this.labelMyOne.AutoSize = true;
@@ -270,17 +278,10 @@
             this.labelMyTwo.TabIndex = 8;
             this.labelMyTwo.Text = "敌方：";
             // 
-            // ColorTemplateToolStripMenuItem
+            // timer1
             // 
-            this.ColorTemplateToolStripMenuItem.Name = "ColorTemplateToolStripMenuItem";
-            this.ColorTemplateToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
-            this.ColorTemplateToolStripMenuItem.Text = "颜色模板";
-            // 
-            // ImageToolStripMenuItem
-            // 
-            this.ImageToolStripMenuItem.Name = "ImageToolStripMenuItem";
-            this.ImageToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
-            this.ImageToolStripMenuItem.Text = "自定义图片";
+            this.timer1.Interval = 3000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Yuyuko
             // 
@@ -328,7 +329,6 @@
         private System.Windows.Forms.ToolStripMenuItem SetGamePathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ExeLogToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DefaultToolStripMenuItem;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem UpdateSorToolStripMenuItem;
         private System.Windows.Forms.Label labelMyOne;
         private System.Windows.Forms.Label labelMyTwo;
@@ -337,6 +337,7 @@
         private System.Windows.Forms.ToolStripMenuItem OpenViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ColorTemplateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ImageToolStripMenuItem;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

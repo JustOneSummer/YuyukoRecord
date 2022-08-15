@@ -52,7 +52,7 @@ namespace YuyukoRecord.game
             string path = System.Environment.CurrentDirectory + "\\ships\\" + shipIndex + ".png";
             if (File.Exists(path))
             {
-                return Image.FromFile(path); ;
+                return Image.FromFile(path);
             }
             return Resources._default;
         }

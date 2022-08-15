@@ -60,7 +60,7 @@ namespace YuyukoRecord.table
                     row.Cells[0].Value = "[" + data.ClanTag + "]" + data.UserName;
                     row.Cells[0].Style.BackColor = ColorRGB(data.ClanColor);
                 }
-                row.Cells[1].Value = Info(data.Hide,data.Pvp.Battles,data.Pvp.Wins,data.Pvp.Damage);
+                row.Cells[1].Value = Info(data.Hide, data.Pvp.Battles, data.Pvp.Wins, data.Pvp.Damage);
                 row.Cells[1].Style.ForeColor = WowsColorUtils.WinsColor(data.Pvp.Wins);
                 row.Cells[1].Style.BackColor = ColorRGB("#ffF8F8");
                 PrCache pr = PrCache.GetList(data.Pvp.Pr);
@@ -73,6 +73,7 @@ namespace YuyukoRecord.table
                 PrCache shipPr = PrCache.GetList(data.Ship.Pr);
                 row.Cells[5].Value = data.Ship.Pr;
                 row.Cells[5].Style.ForeColor = ColorRGB(shipPr.Color);
+                PrImage(row.Cells[6], shipPr);
             }
         }
 
@@ -103,12 +104,26 @@ namespace YuyukoRecord.table
                 PrCache shipPr = PrCache.GetList(data.Ship.Pr);
                 row.Cells[8].Value = data.Ship.Pr;
                 row.Cells[8].Style.ForeColor = ColorRGB(shipPr.Color);
+                PrImage(row.Cells[7], shipPr);
             }
         }
 
         public static Color ColorRGB(string rgb)
         {
             return ColorTranslator.FromHtml(rgb);
+        }
+
+        private static void PrImage(DataGridViewCell dataGridViewCell, PrCache pr)
+        {
+            //检测是否启用了自定义图片
+            if (true)
+            {
+                Image image = PrCache.GetImage(pr);
+                if (image != null)
+                {
+                    dataGridViewCell.Value = image;
+                }
+            }
         }
 
         private static string Info(bool hide, int battle, double wins, int damage)
@@ -118,7 +133,7 @@ namespace YuyukoRecord.table
 
         private static string Level(int level)
         {
-             switch (level)
+            switch (level)
             {
                 case 1: return "Ⅰ";
                 case 2: return "Ⅱ";
