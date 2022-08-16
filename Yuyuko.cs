@@ -381,13 +381,13 @@ namespace YuyukoRecord
                 if (e.RowIndex >= 0)
                 {
                     string v = null;
-                    if (e.ColumnIndex <= 7)
+                    if (e.ColumnIndex <= 6)
                     {
                         //获取友方数据
                         v = dataGridViewOne.Rows[e.RowIndex].Cells[0].Value.ToString();
                         MENU_SHIP_NAME = dataGridViewOne.Rows[e.RowIndex].Cells[3].Value.ToString();
                     }
-                    else if (e.ColumnIndex >= 8)
+                    else if (e.ColumnIndex >= 7)
                     {
                         //获取敌方
                         v = dataGridViewOne.Rows[e.RowIndex].Cells[13].Value.ToString();
