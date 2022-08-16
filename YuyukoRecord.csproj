@@ -96,6 +96,8 @@
     <Compile Include="game\ShipCache.cs" />
     <Compile Include="game\temp\GameTempArenaInfo.cs" />
     <Compile Include="game\temp\Vehicles.cs" />
+    <Compile Include="game\WowsHttp.cs" />
+    <Compile Include="local\LocalService.cs" />
     <Compile Include="mq\MqttUtils.cs" />
     <Compile Include="SourcesLoad.cs" />
     <Compile Include="table\TableTemplate.cs" />
