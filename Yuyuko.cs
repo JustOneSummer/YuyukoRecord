@@ -12,6 +12,7 @@ using uPLibrary.Networking.M2Mqtt;
 using YuyukoRecord.config;
 using YuyukoRecord.game;
 using YuyukoRecord.game.data;
+using YuyukoRecord.local;
 using YuyukoRecord.mq;
 using YuyukoRecord.table;
 using YuyukoRecord.utils;
@@ -122,11 +123,26 @@ namespace YuyukoRecord
                 return;
             }
             labelDataStatus.Text = "开始渲染数据...";
-            DateTime dateTime = DateTime.ParseExact(gameTempArenaInfo.DateTime, "dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture);
-            labelGameTime.Text = dateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            if(!string.IsNullOrEmpty(gameTempArenaInfo.DateTime)){
+                DateTime dateTime = DateTime.ParseExact(gameTempArenaInfo.DateTime, "dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                labelGameTime.Text = dateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            else
+            {
+                labelGameTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            }
             dataGridViewOne.Rows.Clear();
             GAME_DATA = GameData.ToData(gameTempArenaInfo);
-            Publish(MqttUtils.TOPIC_PUSH_REAL, 1, GAME_DATA.GameTempArenaInfo.TempArenaInfoJson);
+            //这里判断是推送到mqtt还是本地化计算
+            if (AppConfigUtils.Instance.MqttServer)
+            {
+                Publish(MqttUtils.TOPIC_PUSH_REAL, 1, GAME_DATA.GameTempArenaInfo.TempArenaInfoJson);
+            }
+            else
+            {
+                //本地化计算
+                LocalService.LoadGameInfo(GAME_SERVER, gameTempArenaInfo);
+            }
             //排序
             GAME_DATA.One.Sort();
             GAME_DATA.Two.Sort();
@@ -214,27 +230,27 @@ namespace YuyukoRecord
             if ("asia".Equals(v))
             {
                 labelServer.Text = "亚服";
-                Publish(MqttUtils.TOPIC_PUSH_SERVER, 1, "asia");
+                Publish(MqttUtils.TOPIC_PUSH_SERVER, 1, GAME_SERVER);
             }
             else if ("cn".Equals(v))
             {
                 labelServer.Text = "国服";
-                Publish(MqttUtils.TOPIC_PUSH_SERVER, 1, "cn");
+                Publish(MqttUtils.TOPIC_PUSH_SERVER, 1, GAME_SERVER);
             }
             else if ("eu".Equals(v))
             {
                 labelServer.Text = "欧服";
-                Publish(MqttUtils.TOPIC_PUSH_SERVER, 1, "eu");
+                Publish(MqttUtils.TOPIC_PUSH_SERVER, 1, GAME_SERVER);
             }
             else if ("na".Equals(v))
             {
                 labelServer.Text = "美服";
-                Publish(MqttUtils.TOPIC_PUSH_SERVER, 1, "na");
+                Publish(MqttUtils.TOPIC_PUSH_SERVER, 1, GAME_SERVER);
             }
             else if ("ru".Equals(v))
             {
                 labelServer.Text = "俄服";
-                Publish(MqttUtils.TOPIC_PUSH_SERVER, 1, "ru");
+                Publish(MqttUtils.TOPIC_PUSH_SERVER, 1, GAME_SERVER);
             }
             else
             {
@@ -249,7 +265,6 @@ namespace YuyukoRecord
 
         public void Subscribe()
         {
-
             string[] topic = new string[] { MqttUtils.TOPIC_POLL_REAL };
             byte[] qos = new byte[] { 2 };
             log.Info("订阅数据=" + MqttUtils.TOPIC_POLL_REAL);
@@ -258,6 +273,10 @@ namespace YuyukoRecord
 
         public void Publish(string topic, byte qos, string data)
         {
+            if (!AppConfigUtils.Instance.MqttServer)
+            {
+                return ;
+            }
             try
             {
                 log.Info("topic=" + topic + " 推送数据:" + data);
@@ -272,6 +291,10 @@ namespace YuyukoRecord
 
         public void ClientMqInit()
         {
+            if (!AppConfigUtils.Instance.MqttServer)
+            {
+                return ;
+            }
             mqttClient = MqttUtils.Init();
             /*           mqttClient.ConnectionClosed += (s, e) => this.Dispatcher.Invoke(new Action(() =>
                         {
@@ -292,38 +315,7 @@ namespace YuyukoRecord
                       else
                       {
                           GameUser gameUser = JsonConvert.DeserializeObject<GameUser>(data);
-                          if (gameUser.Pvp == null)
-                          {
-                              gameUser.Pvp = new GamePlayerInfo();
-                          }
-                          if (gameUser.Ship == null)
-                          {
-                              gameUser.Ship = new GamePlayerInfo();
-                          }
-                          TableUtils.LoadGame(dataGridViewOne, gameUser);
-                          bool d = true;
-                          foreach (GameUser g in GAME_DATA.GameUserList)
-                          {
-                              if (g.UserName.Equals(gameUser.UserName))
-                              {
-                                  d = false;
-                              }
-                          }
-                          if (d)
-                          {
-                              GAME_DATA.GameUserList.Add(gameUser);
-                          }
-                          if (GAME_DATA.GameUserList.Count >= GAME_DATA.GameTempArenaInfo.Vehicles.Count)
-                          {
-                              GAME_DATA.Process();
-                              GameAvg avgOne = GAME_DATA.AvgOne;
-                              GameAvg avgTwo = GAME_DATA.AvgTwo;
-                              labelMyOne.Text = SpOne(avgOne.AvgPr(), avgOne.Battle, avgOne.AvgWins());
-                              labelMyTwo.Text = SpTwo(avgTwo.AvgPr(), avgTwo.Battle, avgTwo.AvgWins());
-                              labelDataStatus.Text = "计算完成...";
-                              contextMenuStrip1.Enabled = true;
-                              ReLoadToolStripMenuItem.Enabled = true;
-                          }
+                          LocalService.Put(gameUser);
                       }
                   }
                   catch (Exception ex)
@@ -489,6 +481,42 @@ namespace YuyukoRecord
                 byte status = MqttUtils.Connect(mqttClient);
                 log.Info("mqtt 重连状态..." + status);
                 Subscribe();
+            }
+            GameUser gameUser = LocalService.Poll();
+            if (gameUser != null)
+            {
+                if (gameUser.Pvp == null)
+                {
+                    gameUser.Pvp = new GamePlayerInfo();
+                }
+                if (gameUser.Ship == null)
+                {
+                    gameUser.Ship = new GamePlayerInfo();
+                }
+                TableUtils.LoadGame(dataGridViewOne, gameUser);
+                bool d = true;
+                foreach (GameUser g in GAME_DATA.GameUserList)
+                {
+                    if (g.UserName.Equals(gameUser.UserName))
+                    {
+                        d = false;
+                    }
+                }
+                if (d)
+                {
+                    GAME_DATA.GameUserList.Add(gameUser);
+                }
+                if (GAME_DATA.GameUserList.Count >= GAME_DATA.GameTempArenaInfo.Vehicles.Count)
+                {
+                    GAME_DATA.Process();
+                    GameAvg avgOne = GAME_DATA.AvgOne;
+                    GameAvg avgTwo = GAME_DATA.AvgTwo;
+                    labelMyOne.Text = SpOne(avgOne.AvgPr(), avgOne.Battle, avgOne.AvgWins());
+                    labelMyTwo.Text = SpTwo(avgTwo.AvgPr(), avgTwo.Battle, avgTwo.AvgWins());
+                    labelDataStatus.Text = "计算完成...";
+                    contextMenuStrip1.Enabled = true;
+                    ReLoadToolStripMenuItem.Enabled = true;
+                }
             }
         }
     }

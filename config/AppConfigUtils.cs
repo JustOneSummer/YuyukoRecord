@@ -19,6 +19,11 @@ namespace YuyukoRecord.config
         /// </summary>
         private int templateType = 0;
 
+        /// <summary>
+        /// 默认mq服务关闭
+        /// </summary>
+        private bool mqttServer = false;
+
         public static void LoadInit()
         {
             string path = System.Environment.CurrentDirectory + "\\config.json";
@@ -66,5 +71,6 @@ namespace YuyukoRecord.config
         public bool ShipImage { get => shipImage; set => shipImage = value; }
         public int TemplateType { get => templateType; set => templateType = value; }
         internal static AppConfigUtils Instance { get => instance; set => instance = value; }
+        public bool MqttServer { get => mqttServer; set => mqttServer = value; }
     }
 }
