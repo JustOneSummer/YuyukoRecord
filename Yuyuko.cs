@@ -22,7 +22,7 @@ namespace YuyukoRecord
     public partial class Yuyuko : Form
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private const string VERSION = "1.2.5";
+        private const string VERSION = "1.2.6";
         private static GameData GAME_DATA = null;
         private Dispatcher Dispatcher = Dispatcher.CurrentDispatcher;
         private MqttClient mqttClient = null;
