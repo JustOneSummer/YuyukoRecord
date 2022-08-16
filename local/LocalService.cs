@@ -33,7 +33,7 @@ namespace YuyukoRecord.local
                 Dictionary<string, string> map = new Dictionary<string, string>();
                 map.Add("server", server);
                 map.Add("mapJson", gameData.GameTempArenaInfo.TempArenaInfoJson);
-                string result = WowsHttp.PostJson(WowsHttp.HOME + "/public/wows/parse/ship/all", map);
+                string result = WowsHttp.PostJson(WowsHttp.HOME + "/public/wows/parse/upload/map", map);
                 log.Info("上传地图信息结果="+result);
             }
             catch(Exception ex)
