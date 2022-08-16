@@ -116,6 +116,7 @@ namespace YuyukoRecord
         public void LoadGameInfo()
         {
             GAME_DATA = null;
+            this.dataGridViewOne.Rows.Clear();
             //读取内容,渲染
             GameTempArenaInfo gameTempArenaInfo = GameTempArenaInfo.LoadJson();
             if (gameTempArenaInfo == null)
@@ -131,7 +132,6 @@ namespace YuyukoRecord
             {
                 labelGameTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             }
-            dataGridViewOne.Rows.Clear();
             GAME_DATA = GameData.ToData(gameTempArenaInfo);
             //这里判断是推送到mqtt还是本地化计算
             if (AppConfigUtils.Instance.MqttServer)
@@ -529,6 +529,18 @@ namespace YuyukoRecord
                     return;
                 }
             }
+        }
+
+        private void labelMyOne_DoubleClick(object sender, EventArgs e)
+        {
+            log.Info("复制内容我方:" + this.labelMyOne.Text);
+            Clipboard.SetText("我方队伍综合评分:"+this.labelMyOne.Text);
+        }
+
+        private void labelMyTwo_DoubleClick(object sender, EventArgs e)
+        {
+            log.Info("复制内容敌方:" + this.labelMyOne.Text);
+            Clipboard.SetText("敌方队伍综合评分:" + this.labelMyOne.Text);
         }
     }
 }

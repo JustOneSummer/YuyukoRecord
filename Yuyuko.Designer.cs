@@ -265,6 +265,7 @@
             this.labelMyOne.Size = new System.Drawing.Size(69, 25);
             this.labelMyOne.TabIndex = 7;
             this.labelMyOne.Text = "我方：";
+            this.labelMyOne.DoubleClick += new System.EventHandler(this.labelMyOne_DoubleClick);
             // 
             // labelMyTwo
             // 
@@ -277,6 +278,7 @@
             this.labelMyTwo.Size = new System.Drawing.Size(69, 25);
             this.labelMyTwo.TabIndex = 8;
             this.labelMyTwo.Text = "敌方：";
+            this.labelMyTwo.DoubleClick += new System.EventHandler(this.labelMyTwo_DoubleClick);
             // 
             // timer1
             // 
