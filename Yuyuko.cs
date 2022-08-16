@@ -533,14 +533,14 @@ namespace YuyukoRecord
 
         private void labelMyOne_DoubleClick(object sender, EventArgs e)
         {
-            log.Info("复制内容我方:" + this.labelMyOne.Text);
+
             Clipboard.SetText("我方队伍综合评分:"+this.labelMyOne.Text);
         }
 
         private void labelMyTwo_DoubleClick(object sender, EventArgs e)
         {
-            log.Info("复制内容敌方:" + this.labelMyTwo.Text);
-            Clipboard.SetText("敌方队伍综合评分:" + this.labelMyOne.Text);
+
+            Clipboard.SetText("敌方队伍综合评分:" + this.labelMyTwo.Text);
         }
     }
 }
