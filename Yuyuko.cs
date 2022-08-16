@@ -22,7 +22,7 @@ namespace YuyukoRecord
     public partial class Yuyuko : Form
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private const string VERSION = "1.2.6";
+        private const string VERSION = "1.2.7";
         private static GameData GAME_DATA = null;
         private Dispatcher Dispatcher = Dispatcher.CurrentDispatcher;
         private MqttClient mqttClient = null;
@@ -397,14 +397,22 @@ namespace YuyukoRecord
                     {
                         MENU_SHIP_NAME = null;
                     }
-                    log.Info("右键内容=" + v);
+                    MENU_DATA = null;
                     //剔除公会信息 开始查找
-                    int index = v.IndexOf("]");
-                    MENU_DATA = v;
-                    if (index >= 0)
+                    int index = v.IndexOf("[");
+                    int indexLast = v.IndexOf("]");
+                    if (index == 0)
                     {
-                        MENU_DATA = v.Substring(index + 1);
+                        MENU_DATA = v.Substring(indexLast + 1);
+                    }else if (indexLast > 1)
+                    {
+                        MENU_DATA = v.Substring(0, index);
                     }
+                    else
+                    {
+                        MENU_DATA = v;
+                    }
+                    log.Info("右键内容=" + MENU_DATA);
                 }
             }
         }
