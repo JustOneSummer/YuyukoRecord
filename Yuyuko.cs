@@ -141,7 +141,7 @@ namespace YuyukoRecord
             else
             {
                 //本地化计算
-                LocalService.LoadGameInfo(GAME_SERVER, gameTempArenaInfo);
+                ThreadPool.QueueUserWorkItem(state=> LocalService.LoadGameInfo(GAME_SERVER, GAME_DATA));
             }
             //排序
             GAME_DATA.One.Sort();
@@ -293,7 +293,12 @@ namespace YuyukoRecord
         {
             if (!AppConfigUtils.Instance.MqttServer)
             {
+                log.Info("非mqtt模式启动...");
                 return ;
+            }
+            else
+            {
+                log.Info("mqtt模式启动...");
             }
             mqttClient = MqttUtils.Init();
             /*           mqttClient.ConnectionClosed += (s, e) => this.Dispatcher.Invoke(new Action(() =>
@@ -324,7 +329,6 @@ namespace YuyukoRecord
                   }
               }));
             Subscribe();
-            timer1.Enabled = true;
         }
 
         public static string SpOne(int pr, int battle, double wins)
@@ -482,40 +486,47 @@ namespace YuyukoRecord
                 log.Info("mqtt 重连状态..." + status);
                 Subscribe();
             }
-            GameUser gameUser = LocalService.Poll();
-            if (gameUser != null)
+            while (true)
             {
-                if (gameUser.Pvp == null)
+                GameUser gameUser = LocalService.Poll();
+                if (gameUser != null)
                 {
-                    gameUser.Pvp = new GamePlayerInfo();
-                }
-                if (gameUser.Ship == null)
-                {
-                    gameUser.Ship = new GamePlayerInfo();
-                }
-                TableUtils.LoadGame(dataGridViewOne, gameUser);
-                bool d = true;
-                foreach (GameUser g in GAME_DATA.GameUserList)
-                {
-                    if (g.UserName.Equals(gameUser.UserName))
+                    if (gameUser.Pvp == null)
                     {
-                        d = false;
+                        gameUser.Pvp = new GamePlayerInfo();
+                    }
+                    if (gameUser.Ship == null)
+                    {
+                        gameUser.Ship = new GamePlayerInfo();
+                    }
+                    TableUtils.LoadGame(dataGridViewOne, gameUser);
+                    bool d = true;
+                    foreach (GameUser g in GAME_DATA.GameUserList)
+                    {
+                        if (g.UserName.Equals(gameUser.UserName))
+                        {
+                            d = false;
+                        }
+                    }
+                    if (d)
+                    {
+                        GAME_DATA.GameUserList.Add(gameUser);
+                    }
+                    if (GAME_DATA.GameUserList.Count >= GAME_DATA.GameTempArenaInfo.Vehicles.Count)
+                    {
+                        GAME_DATA.Process();
+                        GameAvg avgOne = GAME_DATA.AvgOne;
+                        GameAvg avgTwo = GAME_DATA.AvgTwo;
+                        labelMyOne.Text = SpOne(avgOne.AvgPr(), avgOne.Battle, avgOne.AvgWins());
+                        labelMyTwo.Text = SpTwo(avgTwo.AvgPr(), avgTwo.Battle, avgTwo.AvgWins());
+                        labelDataStatus.Text = "计算完成...";
+                        contextMenuStrip1.Enabled = true;
+                        ReLoadToolStripMenuItem.Enabled = true;
                     }
                 }
-                if (d)
+                else
                 {
-                    GAME_DATA.GameUserList.Add(gameUser);
-                }
-                if (GAME_DATA.GameUserList.Count >= GAME_DATA.GameTempArenaInfo.Vehicles.Count)
-                {
-                    GAME_DATA.Process();
-                    GameAvg avgOne = GAME_DATA.AvgOne;
-                    GameAvg avgTwo = GAME_DATA.AvgTwo;
-                    labelMyOne.Text = SpOne(avgOne.AvgPr(), avgOne.Battle, avgOne.AvgWins());
-                    labelMyTwo.Text = SpTwo(avgTwo.AvgPr(), avgTwo.Battle, avgTwo.AvgWins());
-                    labelDataStatus.Text = "计算完成...";
-                    contextMenuStrip1.Enabled = true;
-                    ReLoadToolStripMenuItem.Enabled = true;
+                    return;
                 }
             }
         }

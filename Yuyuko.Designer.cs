@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Yuyuko));
             this.label1 = new System.Windows.Forms.Label();
             this.labelServer = new System.Windows.Forms.Label();
@@ -123,21 +123,21 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewOne.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dataGridViewOne.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewOne.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewOne.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewOne.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewOne.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridViewOne.Location = new System.Drawing.Point(12, 81);
             this.dataGridViewOne.Name = "dataGridViewOne";
             this.dataGridViewOne.ReadOnly = true;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridViewOne.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridViewOne.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewOne.RowTemplate.Height = 23;
             this.dataGridViewOne.Size = new System.Drawing.Size(1460, 878);
             this.dataGridViewOne.TabIndex = 5;
@@ -196,27 +196,27 @@
             // SetGamePathToolStripMenuItem
             // 
             this.SetGamePathToolStripMenuItem.Name = "SetGamePathToolStripMenuItem";
-            this.SetGamePathToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.SetGamePathToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
             this.SetGamePathToolStripMenuItem.Text = "设置游戏路径";
             this.SetGamePathToolStripMenuItem.Click += new System.EventHandler(this.SetGamePathToolStripMenuItem_Click);
             // 
             // UpdateSorToolStripMenuItem
             // 
             this.UpdateSorToolStripMenuItem.Name = "UpdateSorToolStripMenuItem";
-            this.UpdateSorToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.UpdateSorToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
             this.UpdateSorToolStripMenuItem.Text = "更新资源文件";
             this.UpdateSorToolStripMenuItem.Click += new System.EventHandler(this.UpdateSorToolStripMenuItem_Click);
             // 
             // ColorTemplateToolStripMenuItem
             // 
             this.ColorTemplateToolStripMenuItem.Name = "ColorTemplateToolStripMenuItem";
-            this.ColorTemplateToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.ColorTemplateToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
             this.ColorTemplateToolStripMenuItem.Text = "颜色模板";
             // 
             // ImageToolStripMenuItem
             // 
             this.ImageToolStripMenuItem.Name = "ImageToolStripMenuItem";
-            this.ImageToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.ImageToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
             this.ImageToolStripMenuItem.Text = "自定义图片";
             this.ImageToolStripMenuItem.Click += new System.EventHandler(this.ImageToolStripMenuItem_Click);
             // 
@@ -280,6 +280,7 @@
             // 
             // timer1
             // 
+            this.timer1.Enabled = true;
             this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
