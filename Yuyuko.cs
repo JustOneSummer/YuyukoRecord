@@ -620,6 +620,7 @@ namespace YuyukoRecord
                 this.buttonAppLoadModule.Text = "mqtt模式";
                 ClientMqInit();
             }
+            ReLoadToolStripMenuItem.Enabled = true;
             MessageBox.Show("切换成功!");
         }
     }
