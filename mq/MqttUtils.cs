@@ -6,14 +6,14 @@ namespace YuyukoRecord.mq
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public const string MQ_URL = "mq.wows.shinoaki.com:1883";
-        public static string CLIENT_ID = "yuyuko_" + SourcesLoad.GetCpuID();
-        public static string USER_NAME = "wows-poll";
-        public static string PASSWORD = "wows-poll";
+        public static readonly string MQ_URL = "mq.wows.shinoaki.com:1883";
+        public static readonly string CLIENT_ID = "yuyuko_" + SourcesLoad.GetCpuID();
+        public static readonly string USER_NAME = "wows-poll";
+        public static readonly string PASSWORD = "wows-poll";
 
-        public static string TOPIC_PUSH_SERVER = "wows/client/push/server/" + CLIENT_ID;
-        public static string TOPIC_PUSH_REAL = "wows/client/push/real/" + CLIENT_ID;
-        public static string TOPIC_POLL_REAL = "wows/client/poll/real/" + CLIENT_ID;
+        public static readonly string TOPIC_PUSH_SERVER = "wows/client/push/server/" + CLIENT_ID;
+        public static readonly string TOPIC_PUSH_REAL = "wows/client/push/real/" + CLIENT_ID;
+        public static readonly string TOPIC_POLL_REAL = "wows/client/poll/real/" + CLIENT_ID;
 
         /// <summary>
         /// 连接

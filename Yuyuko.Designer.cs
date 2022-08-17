@@ -50,11 +50,14 @@
             this.ReplayPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReLoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShareQrCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ScreenshotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExeLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelMyOne = new System.Windows.Forms.Label();
             this.labelMyTwo = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.buttonAppLoadModule = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOne)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -64,7 +67,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(13, 37);
+            this.label1.Location = new System.Drawing.Point(97, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(106, 21);
             this.label1.TabIndex = 0;
@@ -75,7 +78,7 @@
             this.labelServer.AutoSize = true;
             this.labelServer.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelServer.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.labelServer.Location = new System.Drawing.Point(125, 37);
+            this.labelServer.Location = new System.Drawing.Point(209, 37);
             this.labelServer.Name = "labelServer";
             this.labelServer.Size = new System.Drawing.Size(44, 22);
             this.labelServer.TabIndex = 1;
@@ -174,6 +177,8 @@
             this.ReplayPathToolStripMenuItem,
             this.ReLoadToolStripMenuItem,
             this.DefaultToolStripMenuItem,
+            this.ShareQrCodeToolStripMenuItem,
+            this.ScreenshotToolStripMenuItem,
             this.InfoToolStripMenuItem,
             this.ExeLogToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -196,27 +201,27 @@
             // SetGamePathToolStripMenuItem
             // 
             this.SetGamePathToolStripMenuItem.Name = "SetGamePathToolStripMenuItem";
-            this.SetGamePathToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
+            this.SetGamePathToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.SetGamePathToolStripMenuItem.Text = "设置游戏路径";
             this.SetGamePathToolStripMenuItem.Click += new System.EventHandler(this.SetGamePathToolStripMenuItem_Click);
             // 
             // UpdateSorToolStripMenuItem
             // 
             this.UpdateSorToolStripMenuItem.Name = "UpdateSorToolStripMenuItem";
-            this.UpdateSorToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
+            this.UpdateSorToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.UpdateSorToolStripMenuItem.Text = "更新资源文件";
             this.UpdateSorToolStripMenuItem.Click += new System.EventHandler(this.UpdateSorToolStripMenuItem_Click);
             // 
             // ColorTemplateToolStripMenuItem
             // 
             this.ColorTemplateToolStripMenuItem.Name = "ColorTemplateToolStripMenuItem";
-            this.ColorTemplateToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
+            this.ColorTemplateToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.ColorTemplateToolStripMenuItem.Text = "颜色模板";
             // 
             // ImageToolStripMenuItem
             // 
             this.ImageToolStripMenuItem.Name = "ImageToolStripMenuItem";
-            this.ImageToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
+            this.ImageToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.ImageToolStripMenuItem.Text = "自定义图片";
             this.ImageToolStripMenuItem.Click += new System.EventHandler(this.ImageToolStripMenuItem_Click);
             // 
@@ -240,6 +245,20 @@
             this.DefaultToolStripMenuItem.Size = new System.Drawing.Size(99, 23);
             this.DefaultToolStripMenuItem.Text = "恢复窗口大小";
             this.DefaultToolStripMenuItem.Click += new System.EventHandler(this.DefaultToolStripMenuItem_Click);
+            // 
+            // ShareQrCodeToolStripMenuItem
+            // 
+            this.ShareQrCodeToolStripMenuItem.Name = "ShareQrCodeToolStripMenuItem";
+            this.ShareQrCodeToolStripMenuItem.Size = new System.Drawing.Size(73, 23);
+            this.ShareQrCodeToolStripMenuItem.Text = "分享对局";
+            this.ShareQrCodeToolStripMenuItem.Click += new System.EventHandler(this.ShareQrCodeToolStripMenuItem_Click);
+            // 
+            // ScreenshotToolStripMenuItem
+            // 
+            this.ScreenshotToolStripMenuItem.Name = "ScreenshotToolStripMenuItem";
+            this.ScreenshotToolStripMenuItem.Size = new System.Drawing.Size(73, 23);
+            this.ScreenshotToolStripMenuItem.Text = "一键截图";
+            this.ScreenshotToolStripMenuItem.Click += new System.EventHandler(this.ScreenshotToolStripMenuItem_Click);
             // 
             // InfoToolStripMenuItem
             // 
@@ -286,11 +305,24 @@
             this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // buttonAppLoadModule
+            // 
+            this.buttonAppLoadModule.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.buttonAppLoadModule.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonAppLoadModule.Location = new System.Drawing.Point(12, 27);
+            this.buttonAppLoadModule.Name = "buttonAppLoadModule";
+            this.buttonAppLoadModule.Size = new System.Drawing.Size(79, 45);
+            this.buttonAppLoadModule.TabIndex = 9;
+            this.buttonAppLoadModule.Text = "http模式";
+            this.buttonAppLoadModule.UseVisualStyleBackColor = false;
+            this.buttonAppLoadModule.Click += new System.EventHandler(this.buttonAppLoadModule_Click);
+            // 
             // Yuyuko
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1484, 971);
+            this.Controls.Add(this.buttonAppLoadModule);
             this.Controls.Add(this.labelMyTwo);
             this.Controls.Add(this.labelMyOne);
             this.Controls.Add(this.dataGridViewOne);
@@ -341,6 +373,9 @@
         private System.Windows.Forms.ToolStripMenuItem ColorTemplateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ImageToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem ShareQrCodeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ScreenshotToolStripMenuItem;
+        private System.Windows.Forms.Button buttonAppLoadModule;
     }
 }
 

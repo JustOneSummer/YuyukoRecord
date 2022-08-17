@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
@@ -17,12 +19,13 @@ using YuyukoRecord.mq;
 using YuyukoRecord.table;
 using YuyukoRecord.utils;
 
+
 namespace YuyukoRecord
 {
     public partial class Yuyuko : Form
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private const string VERSION = "1.2.7";
+        public static readonly string VERSION = "1.2.8";
         private static GameData GAME_DATA = null;
         private Dispatcher Dispatcher = Dispatcher.CurrentDispatcher;
         private MqttClient mqttClient = null;
@@ -56,6 +59,14 @@ namespace YuyukoRecord
             ShipCache.Http();
             log.Info("加载配置信息...");
             AppConfigUtils.LoadInit();
+            if (AppConfigUtils.Instance.MqttServer)
+            {   
+                this.buttonAppLoadModule.Text = "mqtt模式";
+            }
+            else
+            {
+                this.buttonAppLoadModule.Text = "http模式";
+            }
             ClientMqInit();
             string v = SourcesLoad.LoadGamePath();
             if (string.IsNullOrEmpty(v))
@@ -355,11 +366,17 @@ namespace YuyukoRecord
 
         private void Yuyuko_FormClosed(object sender, FormClosedEventArgs e)
         {
+            CloseMqtt();
+        }
+
+        private void CloseMqtt()
+        {
             if (mqttClient != null)
             {
                 try
                 {
                     mqttClient.Disconnect();
+                    mqttClient= null;
                 }
                 catch (Exception ex)
                 {
@@ -549,6 +566,61 @@ namespace YuyukoRecord
         {
 
             Clipboard.SetText("敌方队伍综合评分:" + this.labelMyTwo.Text);
+        }
+
+        /// <summary>
+        /// 截图
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ScreenshotToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Opacity = 0;
+            Image image = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            Graphics g = Graphics.FromImage(image);
+            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), Screen.PrimaryScreen.Bounds.Size);
+            string imageName = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".jpg";
+            image.Save(@".\temp\image\"+ imageName, ImageFormat.Jpeg);
+            Clipboard.SetImage(image);
+            this.Opacity = 1;
+            ToolTip toolTip = new ToolTip();
+            toolTip.Show("截图成功", this, this.Width / 2, this.Height / 2, 2000);
+        }
+
+        /// <summary>
+        /// 二维码分享
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShareQrCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ArCodeImage image = new ArCodeImage();
+            image.ShowDialog();
+        }
+
+
+        /// <summary>
+        /// 切换加载模式
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAppLoadModule_Click(object sender, EventArgs e)
+        {
+            if (AppConfigUtils.Instance.MqttServer)
+            {
+                this.buttonAppLoadModule.Text = "http模式";
+                AppConfigUtils.Instance.MqttServer = false;
+                AppConfigUtils.Save(AppConfigUtils.Instance);
+                CloseMqtt();
+            }
+            else
+            {
+                AppConfigUtils.Instance.MqttServer = true;
+                AppConfigUtils.Save(AppConfigUtils.Instance);
+                this.buttonAppLoadModule.Text = "mqtt模式";
+                ClientMqInit();
+            }
+            MessageBox.Show("切换成功!");
         }
     }
 }

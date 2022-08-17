@@ -33,7 +33,7 @@ namespace YuyukoRecord.game
                     SHIP_MAP.Add(s.Id, s);
                 }
             });
-            log.Info("加载 [" + SHIP_MAP.Count + "] 战舰信息缓存 json=" + JsonConvert.SerializeObject(SHIP_MAP));
+            log.Info("加载 [" + SHIP_MAP.Count + "] 战舰信息缓存 size=" + SHIP_MAP.Count);
         }
 
         public static ShipCache GetMap(long id)
