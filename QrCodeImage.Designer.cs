@@ -1,6 +1,6 @@
 ﻿namespace YuyukoRecord
 {
-    partial class ArCodeImage
+    partial class QrCodeImage
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ArCodeImage));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QrCodeImage));
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBoxQrCode = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxQrCode)).BeginInit();
@@ -51,7 +51,7 @@
             this.pictureBoxQrCode.TabIndex = 1;
             this.pictureBoxQrCode.TabStop = false;
             // 
-            // ArCodeImage
+            // QrCodeImage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -59,9 +59,9 @@
             this.Controls.Add(this.pictureBoxQrCode);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "ArCodeImage";
+            this.Name = "QrCodeImage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ArCodeImage";
+            this.Text = "QrCodeImage";
             this.Load += new System.EventHandler(this.ArCodeImage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxQrCode)).EndInit();
             this.ResumeLayout(false);

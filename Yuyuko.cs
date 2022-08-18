@@ -594,7 +594,7 @@ namespace YuyukoRecord
         /// <param name="e"></param>
         private void ShareQrCodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ArCodeImage image = new ArCodeImage();
+            QrCodeImage image = new QrCodeImage();
             image.ShowDialog();
         }
 

@@ -13,9 +13,9 @@ using ZXing.QrCode;
 
 namespace YuyukoRecord
 {
-    public partial class ArCodeImage : Form
+    public partial class QrCodeImage : Form
     {
-        public ArCodeImage()
+        public QrCodeImage()
         {
             InitializeComponent();
         }
