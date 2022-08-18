@@ -47,7 +47,7 @@ namespace YuyukoRecord.game
                     map.Add("server",server);
                     map.Add("userName",gameUser.UserName);
                     map.Add("shipId",vehicles.ShipId.ToString());
-                    map.Add("data", data);
+                    map.Add("data", Convert.ToBase64String(GzipUtils.Compress(Encoding.UTF8.GetBytes(data))));
                     string result = WowsJsonStatus(PostJson(HOME + "/public/wows/parse/ship/all", map));
                     if (!string.IsNullOrEmpty(result))
                     {
