@@ -151,8 +151,8 @@ namespace YuyukoRecord
             }
             else
             {
-                //本地化计算
-                ThreadPool.QueueUserWorkItem(state=> LocalService.LoadGameInfo(GAME_SERVER, GAME_DATA));
+
+                LocalService.LoadGameInfo(GAME_SERVER, GAME_DATA);
             }
             //排序
             GAME_DATA.One.Sort();

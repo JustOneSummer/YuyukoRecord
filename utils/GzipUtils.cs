@@ -25,7 +25,7 @@ namespace YuyukoRecord.utils
             int l = g.Read(d, 0, 20480);
             while (l > 0)
             {
-                s.Append(Encoding.Default.GetString(d, 0, l));
+                s.Append(Encoding.UTF8.GetString(d, 0, l));
                 l = g.Read(d, 0, 20480);
             }
 

@@ -17,7 +17,7 @@ namespace YuyukoRecord.game
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static readonly string HOME = "https://client.api.wows.shinoaki.com";
+        public static readonly string HOME = "http://linxun.link:9888";
         private static readonly string ASIS = "https://api.worldofwarships.asia";
         private static readonly string CN = "https://api.wowsgame.cn";
         private static readonly string EU = "https://api.worldofwarships.eu";
@@ -37,6 +37,19 @@ namespace YuyukoRecord.game
             {
                 try
                 {
+                    //请求公会
+                    string clanData =  ClanUserVort(server,gameUser.AccountId);
+                    Dictionary<string, string> mapClan = new Dictionary<string, string>();
+                    mapClan.Add("server", server);
+                    mapClan.Add("data", Convert.ToBase64String(GzipUtils.Compress(Encoding.UTF8.GetBytes(clanData))));
+                    //
+                    string resultClan = WowsJsonStatus(PostJson(HOME + "/public/wows/parse/clan/user", mapClan));
+                    ClanUser clanUser = null;
+                    if (!string.IsNullOrEmpty(resultClan))
+                    {
+                        clanUser = JsonConvert.DeserializeObject<ClanUser>(resultClan);
+                    }
+                    //请求战舰数据
                     string data = server.Equals("cn") ? ShipAllVort(server, gameUser.AccountId) : ShipAllDev(server, gameUser.AccountId);
                     if (string.IsNullOrEmpty(data))
                     {
@@ -52,6 +65,11 @@ namespace YuyukoRecord.game
                     if (!string.IsNullOrEmpty(result))
                     {
                         gameUser = JsonConvert.DeserializeObject<GameUser>(result);
+                    }
+                    if (clanUser != null)
+                    {
+                        gameUser.ClanTag = clanUser.Tag;
+                        gameUser.ClanColor = clanUser.ColorRgb;
                     }
                 }
                 catch (Exception ex)
@@ -214,6 +232,20 @@ namespace YuyukoRecord.game
             {
                 return Get(url);
             }catch (Exception ex)
+            {
+                log.Error(accountId + " 请求vortex ship失败 server=" + server + " error=" + ex);
+            }
+            return null;
+        }
+
+        private static string ClanUserVort(string server, long accountId)
+        {
+            string url = Url(server).Replace("api", "vortex") + VORTEX_SHIP + accountId + "/clans/";
+            try
+            {
+                return Get(url);
+            }
+            catch (Exception ex)
             {
                 log.Error(accountId + " 请求vortex ship失败 server=" + server + " error=" + ex);
             }
