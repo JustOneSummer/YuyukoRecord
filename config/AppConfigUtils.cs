@@ -27,6 +27,7 @@ namespace YuyukoRecord.config
         public static void LoadInit()
         {
             string path = System.Environment.CurrentDirectory + "\\config.json";
+            ApiConfig.LoadInit();
             if (File.Exists(path))
             {
                 FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);

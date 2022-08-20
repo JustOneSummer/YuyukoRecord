@@ -7,6 +7,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Web;
+using YuyukoRecord.config;
 using YuyukoRecord.game.data;
 using YuyukoRecord.game.temp;
 using YuyukoRecord.utils;
@@ -17,7 +18,7 @@ namespace YuyukoRecord.game
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static readonly string HOME = "http://linxun.link:9888";
+        public static readonly string HOME = ApiConfig.Instance.HttpServer;
         private static readonly string ASIS = "https://api.worldofwarships.asia";
         private static readonly string CN = "https://api.wowsgame.cn";
         private static readonly string EU = "https://api.worldofwarships.eu";
@@ -26,7 +27,7 @@ namespace YuyukoRecord.game
 
         private static readonly string VORTEX = "/api/accounts/search/autocomplete/";
         private static readonly string VORTEX_SHIP = "/api/accounts/";
-        private static readonly string API_KEY = "907d9c6bfc0d896a2c156e57194a97cf";
+        private static readonly string API_KEY = ApiConfig.Instance.ApiKey;
 
 
         public static GameUser ShinoAki(string server, Vehicles vehicles)

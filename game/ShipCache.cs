@@ -97,7 +97,7 @@ namespace YuyukoRecord.game
             {
                 try
                 {
-                    string jsonData = SourcesLoad.Get(SourcesLoad.URL + "/public/wows/encyclopedia/ship/search");
+                    string jsonData = SourcesLoad.Get(SourcesLoad.COS_SHIP_INFO);
                     using (StreamWriter streamWriter = new StreamWriter(path, false))
                     {
                         streamWriter.WriteLine(jsonData);

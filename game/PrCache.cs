@@ -82,7 +82,7 @@ namespace YuyukoRecord.game
             {
                 try
                 {
-                    string jsonData = SourcesLoad.Get(SourcesLoad.URL + "/public/wows/encyclopedia/pr/list");
+                    string jsonData = SourcesLoad.Get(SourcesLoad.COS_PR);
                     using (StreamWriter streamWriter = new StreamWriter(path, false))
                     {
                         streamWriter.WriteLine(jsonData);

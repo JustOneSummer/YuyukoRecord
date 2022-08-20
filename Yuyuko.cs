@@ -52,13 +52,13 @@ namespace YuyukoRecord
             log.Info("正在运行的 .net framework 信息：" + RuntimeInformation.FrameworkDescription);
             log.Info("windows version = " + Program.OS_VERSION);
             log.Info("初始化 版本=" + VERSION);
+            AppConfigUtils.LoadInit();
             TableUtils.Load(dataGridViewOne);
             log.Info("加载pr信息...");
             PrCache.Http();
             log.Info("加载ship信息...");
             ShipCache.Http();
             log.Info("加载配置信息...");
-            AppConfigUtils.LoadInit();
             if (AppConfigUtils.Instance.MqttServer)
             {   
                 this.buttonAppLoadModule.Text = "mqtt模式";
