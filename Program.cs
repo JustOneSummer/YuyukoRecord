@@ -19,6 +19,7 @@ namespace YuyukoRecord
         {
             try
             {
+                System.Net.ServicePointManager.DefaultConnectionLimit = 100;
                 SourcesLoad.removeLog();
                 log4net.Config.XmlConfigurator.Configure();
                 OS_Version();

@@ -25,13 +25,14 @@ namespace YuyukoRecord
     public partial class Yuyuko : Form
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public static readonly string VERSION = "1.3.0";
+        public static readonly string VERSION = "1.3.1";
         private static GameData GAME_DATA = null;
         private Dispatcher Dispatcher = Dispatcher.CurrentDispatcher;
         private MqttClient mqttClient = null;
         private string MENU_DATA = null;
         private string MENU_SHIP_NAME = null;
         private string GAME_SERVER = null;
+        private bool GAME_STATUS = false;
         public Yuyuko()
         {
             //1、设置窗体的双缓冲
@@ -76,11 +77,14 @@ namespace YuyukoRecord
             }
             CheckUpdate();
             buttonLoadServer_Click(sender, null);
-            if (!string.IsNullOrEmpty(SourcesLoad.LoadGamePath()))
-            {
-                //开始监听文件
-                FileEvent();
-            }
+            //if (!string.IsNullOrEmpty(SourcesLoad.LoadGamePath()))
+            //{
+            //开始监听文件
+            //FileEvent();
+            //}
+            log.Info("游戏路径=" + SourcesLoad.LoadGamePath());
+            this.labelGameHome.Text = SourcesLoad.LoadGamePath();
+            this.timer2.Enabled = true;
         }
 
         private void FileEvent()
@@ -100,6 +104,7 @@ namespace YuyukoRecord
 
             watcher.Created += (s, e) => Dispatcher.Invoke(new Action(() =>
               {
+                  GAME_STATUS = true;
                   //指定当文件被更改、创建或删除时要做的事
                   Console.WriteLine("file:" + e.FullPath + "" + e.ChangeType);
                   if (WatcherChangeTypes.Created == e.ChangeType)
@@ -622,6 +627,37 @@ namespace YuyukoRecord
             }
             ReLoadToolStripMenuItem.Enabled = true;
             MessageBox.Show("切换成功!");
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            ///检测对局文件
+            string path = SourcesLoad.LoadGamePath() + "replays";
+            if (!Directory.Exists(path))
+            {
+                log.Error("replays 文件夹不存在！");
+                return;
+            }
+            string json = path + "\\tempArenaInfo.json";
+            if (File.Exists(json))
+            {
+                if (!GAME_STATUS)
+                {
+                    GAME_STATUS = true;
+                    labelDataStatus.Text = "数据加载中...";
+                    //加载对局信息
+                    LoadGameInfo();
+                }
+            }
+            else
+            {
+                if (GAME_STATUS)
+                {
+                    labelDataStatus.Text = "等待开始游戏...";
+                    contextMenuStrip1.Enabled = false;
+                }
+                GAME_STATUS = false;
+            }
         }
     }
 }

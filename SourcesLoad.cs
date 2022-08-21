@@ -71,10 +71,12 @@ namespace YuyukoRecord
         {
             try
             {
+                System.GC.Collect();
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.Method = "GET";
                 request.ContentType = "application/json;charset=UTF-8";
                 request.Timeout = 20000;
+                request.KeepAlive = false;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 string encoding = response.Headers["content-encoding"];
                 string retString;
@@ -84,10 +86,10 @@ namespace YuyukoRecord
                 }
                 else
                 {
-                    Stream myResponseStream = response.GetResponseStream();
-                    StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
-                    retString = myStreamReader.ReadToEnd();
 
+                    StreamReader myStreamReader = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8"));
+                    retString = myStreamReader.ReadToEnd();
+                    myStreamReader.Close();
                 }
                 response.Close();
                 return retString;
@@ -103,6 +105,7 @@ namespace YuyukoRecord
         {
             try
             {
+                System.GC.Collect();
                 HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
                 //发送请求并获取相应回应数据
                 HttpWebResponse response = request.GetResponse() as HttpWebResponse;

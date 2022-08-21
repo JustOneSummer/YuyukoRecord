@@ -58,6 +58,8 @@
             this.labelMyTwo = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.buttonAppLoadModule = new System.Windows.Forms.Button();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.labelGameHome = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOne)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -89,7 +91,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(1209, 37);
+            this.label2.Location = new System.Drawing.Point(1210, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 21);
             this.label2.TabIndex = 2;
@@ -101,7 +103,7 @@
             this.labelGameTime.AutoSize = true;
             this.labelGameTime.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelGameTime.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.labelGameTime.Location = new System.Drawing.Point(1305, 37);
+            this.labelGameTime.Location = new System.Drawing.Point(1306, 32);
             this.labelGameTime.Name = "labelGameTime";
             this.labelGameTime.Size = new System.Drawing.Size(163, 21);
             this.labelGameTime.TabIndex = 3;
@@ -113,7 +115,7 @@
             this.labelDataStatus.AutoSize = true;
             this.labelDataStatus.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelDataStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.labelDataStatus.Location = new System.Drawing.Point(1085, 37);
+            this.labelDataStatus.Location = new System.Drawing.Point(1086, 32);
             this.labelDataStatus.Name = "labelDataStatus";
             this.labelDataStatus.Size = new System.Drawing.Size(118, 21);
             this.labelDataStatus.TabIndex = 4;
@@ -201,27 +203,27 @@
             // SetGamePathToolStripMenuItem
             // 
             this.SetGamePathToolStripMenuItem.Name = "SetGamePathToolStripMenuItem";
-            this.SetGamePathToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.SetGamePathToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
             this.SetGamePathToolStripMenuItem.Text = "设置游戏路径";
             this.SetGamePathToolStripMenuItem.Click += new System.EventHandler(this.SetGamePathToolStripMenuItem_Click);
             // 
             // UpdateSorToolStripMenuItem
             // 
             this.UpdateSorToolStripMenuItem.Name = "UpdateSorToolStripMenuItem";
-            this.UpdateSorToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.UpdateSorToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
             this.UpdateSorToolStripMenuItem.Text = "更新资源文件";
             this.UpdateSorToolStripMenuItem.Click += new System.EventHandler(this.UpdateSorToolStripMenuItem_Click);
             // 
             // ColorTemplateToolStripMenuItem
             // 
             this.ColorTemplateToolStripMenuItem.Name = "ColorTemplateToolStripMenuItem";
-            this.ColorTemplateToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.ColorTemplateToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
             this.ColorTemplateToolStripMenuItem.Text = "颜色模板";
             // 
             // ImageToolStripMenuItem
             // 
             this.ImageToolStripMenuItem.Name = "ImageToolStripMenuItem";
-            this.ImageToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.ImageToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
             this.ImageToolStripMenuItem.Text = "自定义图片";
             this.ImageToolStripMenuItem.Click += new System.EventHandler(this.ImageToolStripMenuItem_Click);
             // 
@@ -317,11 +319,26 @@
             this.buttonAppLoadModule.UseVisualStyleBackColor = false;
             this.buttonAppLoadModule.Click += new System.EventHandler(this.buttonAppLoadModule_Click);
             // 
+            // timer2
+            // 
+            this.timer2.Interval = 1000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // labelGameHome
+            // 
+            this.labelGameHome.AutoSize = true;
+            this.labelGameHome.Location = new System.Drawing.Point(1088, 66);
+            this.labelGameHome.Name = "labelGameHome";
+            this.labelGameHome.Size = new System.Drawing.Size(53, 12);
+            this.labelGameHome.TabIndex = 10;
+            this.labelGameHome.Text = "游戏路径";
+            // 
             // Yuyuko
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1484, 971);
+            this.Controls.Add(this.labelGameHome);
             this.Controls.Add(this.buttonAppLoadModule);
             this.Controls.Add(this.labelMyTwo);
             this.Controls.Add(this.labelMyOne);
@@ -376,6 +393,8 @@
         private System.Windows.Forms.ToolStripMenuItem ShareQrCodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ScreenshotToolStripMenuItem;
         private System.Windows.Forms.Button buttonAppLoadModule;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Label labelGameHome;
     }
 }
 

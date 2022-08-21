@@ -99,6 +99,7 @@ namespace YuyukoRecord.game
         {
             try
             {
+                System.GC.Collect();
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.Method = "GET";
                 request.ContentType = "application/json;charset=UTF-8";
@@ -107,6 +108,7 @@ namespace YuyukoRecord.game
                 request.Headers.Add("Accept-Encoding", "gzip,deflate");
                 request.Headers.Add("Accept-Language", "zh-CN");
                 request.Accept = "*/*";
+                request.KeepAlive = false;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 string encoding = response.Headers["content-encoding"];
                 string retString;
@@ -119,6 +121,7 @@ namespace YuyukoRecord.game
                     Stream myResponseStream = response.GetResponseStream();
                     StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
                     retString = myStreamReader.ReadToEnd();
+                    myStreamReader.Close();
 
                 }
                 response.Close();
@@ -133,6 +136,7 @@ namespace YuyukoRecord.game
 
         public static string PostFrom(string url, Dictionary<string, string> map)
         {
+            System.GC.Collect();
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "POST";
             request.ContentType = "application/json;charset=UTF-8";
@@ -140,6 +144,7 @@ namespace YuyukoRecord.game
             request.Host = HttpHost(url);
             request.Headers.Add("Accept-Encoding", "gzip,deflate");
             request.Headers.Add("Accept-Language", "zh-CN");
+            request.KeepAlive = false;
             NameValueCollection outgoingQueryString = HttpUtility.ParseQueryString(String.Empty);
             foreach (var item in map)
             {
@@ -167,11 +172,13 @@ namespace YuyukoRecord.game
                 myStreamReader.Close();
                 myResponseStream.Close();
             }
+            response.Close();
             return retString;
         }
 
         public static string PostJson(string url, Dictionary<string, string> map)
         {
+            System.GC.Collect();
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "POST";
             request.ContentType = "application/json;charset=UTF-8";
@@ -179,6 +186,7 @@ namespace YuyukoRecord.game
             request.Host = HttpHost(url);
             request.Headers.Add("Accept-Encoding", "gzip,deflate");
             request.Headers.Add("Accept-Language", "zh-CN");
+            request.KeepAlive = false;
             /*NameValueCollection outgoingQueryString = HttpUtility.ParseQueryString(String.Empty);
             foreach (var item in map)
             {
@@ -206,6 +214,7 @@ namespace YuyukoRecord.game
                 myStreamReader.Close();
                 myResponseStream.Close();
             }
+            response.Close();
             return retString;
         }
 
