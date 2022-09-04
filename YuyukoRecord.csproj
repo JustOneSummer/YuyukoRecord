@@ -187,5 +187,8 @@
     <None Include="Resources\yuyuko_avatar.ico" />
     <Content Include="yuyuko_avatar.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="game\game_player_info_analyze\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
