@@ -76,6 +76,8 @@
   <ItemGroup>
     <Compile Include="config\ApiConfig.cs" />
     <Compile Include="game\data\ClanUser.cs" />
+    <Compile Include="game\game_player_info_analyze\ApiShipAll.cs" />
+    <Compile Include="game\game_player_info_analyze\ShipBattles.cs" />
     <Compile Include="QrCodeImage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,8 +189,6 @@
     <None Include="Resources\yuyuko_avatar.ico" />
     <Content Include="yuyuko_avatar.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="game\game_player_info_analyze\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
