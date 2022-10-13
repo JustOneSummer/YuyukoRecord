@@ -103,7 +103,7 @@ namespace YuyukoRecord.game
             }
             sr.Close();
             fs.Close();
-            LoadJson(JToken.Parse(info.ToString()).ToString());
+            LoadJson(JToken.Parse(info.ToString()).Value<JToken>("data").ToString());
         }
     }
 }

@@ -15,8 +15,9 @@ namespace YuyukoRecord
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public static string URL = "https://api.wows.shinoaki.com";
-        public static string COS_PR = "https://yuyuko-1253221348.cos.ap-shanghai.myqcloud.com/app/api/PR.json";
-        public static string COS_SHIP_INFO = "https://yuyuko-1253221348.cos.ap-shanghai.myqcloud.com/app/api/ship_info_data.json";
+        public static string COS_PR = "https://api.wows.shinoaki.com/public/wows/encyclopedia/pr/list";
+        public static string COS_AVG = "https://api.wows.shinoaki.com/public/wows/encyclopedia/ship/avg";
+        public static string COS_SHIP_INFO = "https://api.wows.shinoaki.com/public/wows/encyclopedia/ship/search";
         private static string GAME_PATH = System.Environment.CurrentDirectory + "/game_path.txt";
         private static string GAME_HOME = null;
         private static string GAME_SERVER = null;

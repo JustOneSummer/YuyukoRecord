@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
+    "\\game",
+    "\\game\\data",
+    "\\game\\game_player_info_analyze",
     "\\mq"
   ],
-  "SelectedNode": "\\mq\\MqttUtils.cs",
   "PreviewInSolutionExplorer": false
 }

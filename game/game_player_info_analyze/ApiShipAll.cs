@@ -18,8 +18,8 @@ namespace YuyukoRecord.game.game_player_info_analyze
                 long shipId = long.Parse(jProperty.Name);
                 shipBattlesMap.Add(shipId, ShipBattles.ToData(content, shipId));
             }
-            //筛选计算
-
+            //筛选计算 计算总战绩和单船的战绩
+            return null;
         }
     }
 }

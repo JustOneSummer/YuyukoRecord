@@ -59,6 +59,8 @@ namespace YuyukoRecord
             PrCache.Http();
             log.Info("加载ship信息...");
             ShipCache.Http();
+            log.Info("加载avg信息...");
+            AvgShip.Http();
             log.Info("加载配置信息...");
             if (AppConfigUtils.Instance.MqttServer)
             {   
