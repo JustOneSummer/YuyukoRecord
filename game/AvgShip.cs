@@ -22,6 +22,28 @@ namespace YuyukoRecord.game
         private double averageDamageDealt;
         private double averageFrags;
 
+        public void Add(AvgShip data)
+        {
+            this.WinRate += data.WinRate;
+            this.AverageDamageDealt += data.AverageDamageDealt;
+            this.AverageFrags += data.AverageFrags;
+        }
+
+        public double AvgDamage(long battle)
+        {
+            return battle <= 0 ? this.averageDamageDealt : battle * this.averageDamageDealt;
+        }
+
+        public double AvgFrags(long battle)
+        {
+            return battle <= 0 ? this.averageFrags : battle * this.averageFrags;
+        }
+
+        public double AvgWins(long battle)
+        {
+            return battle <= 0 ? this.winRate : battle * this.winRate / 100;
+        }
+
         public static void LoadJson(JToken jt)
         {
             AVG_LIST.Clear();

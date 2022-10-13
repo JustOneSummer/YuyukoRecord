@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YuyukoRecord.game.game_player_info_analyze
 {
@@ -16,7 +11,7 @@ namespace YuyukoRecord.game.game_player_info_analyze
         /**
          * 战斗场次
          */
-        private long battles;
+        private int battles;
         /**
          * 胜利场次
          */
@@ -50,6 +45,18 @@ namespace YuyukoRecord.game.game_player_info_analyze
          */
         private long shots;
 
+        public void Add(ShipBattles data)
+        {
+            this.battles += data.Battles;
+            this.wins += data.Wins;
+            this.survivedBattles += data.SurvivedBattles;
+            this.damage += data.Damage;
+            this.xp += data.Xp;
+            this.frags += data.Frags;
+            this.hit += data.Hit;
+            this.shots += data.Shots;
+        }
+
         public static ShipBattles ToData(JToken token,long shipId)
         {
             ShipBattles info = new ShipBattles();
@@ -70,7 +77,7 @@ namespace YuyukoRecord.game.game_player_info_analyze
         }
 
         public long ShipId { get => shipId; set => shipId = value; }
-        public long Battles { get => battles; set => battles = value; }
+        public int Battles { get => battles; set => battles = value; }
         public long Wins { get => wins; set => wins = value; }
         public long SurvivedBattles { get => survivedBattles; set => survivedBattles = value; }
         public long Damage { get => damage; set => damage = value; }

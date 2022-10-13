@@ -78,6 +78,7 @@
     <Compile Include="game\AvgShip.cs" />
     <Compile Include="game\data\ClanUser.cs" />
     <Compile Include="game\game_player_info_analyze\ApiShipAll.cs" />
+    <Compile Include="game\game_player_info_analyze\GameInfoPrAvgData.cs" />
     <Compile Include="game\game_player_info_analyze\ShipBattles.cs" />
     <Compile Include="QrCodeImage.cs">
       <SubType>Form</SubType>
