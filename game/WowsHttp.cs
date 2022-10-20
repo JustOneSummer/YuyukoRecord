@@ -1,14 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using EasyHttp.Http;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Web;
 using YuyukoRecord.config;
 using YuyukoRecord.game.data;
+using YuyukoRecord.game.game_player_info_analyze;
 using YuyukoRecord.game.temp;
 using YuyukoRecord.utils;
 
@@ -34,44 +38,49 @@ namespace YuyukoRecord.game
         {
             //搜索用户
             GameUser gameUser = SearchUser(server, vehicles.Name);
+            Thread.Sleep(500);
             if (!gameUser.Hide)
             {
                 try
                 {
                     //请求公会
-                    string clanData =  ClanUserVort(server,gameUser.AccountId);
+                   /* string clanData =  ClanUserVort(server,gameUser.AccountId);
                     Dictionary<string, string> mapClan = new Dictionary<string, string>();
                     mapClan.Add("server", server);
                     mapClan.Add("data", Convert.ToBase64String(GzipUtils.Compress(Encoding.UTF8.GetBytes(clanData))));
                     //
-                    string resultClan = WowsJsonStatus(PostJson(HOME + "/public/wows/parse/clan/user", mapClan));
+                    string resultClan = WowsJsonStatus(PostJson(HOME + "/public/wows/parse/clan/user", mapClan));*/
                     ClanUser clanUser = null;
-                    if (!string.IsNullOrEmpty(resultClan))
+                   /* if (!string.IsNullOrEmpty(resultClan))
                     {
                         clanUser = JsonConvert.DeserializeObject<ClanUser>(resultClan);
-                    }
+                    }*/
                     //请求战舰数据
-                    string data = server.Equals("cn") ? ShipAllVort(server, gameUser.AccountId) : ShipAllDev(server, gameUser.AccountId);
+                    //string data = server.Equals("cn") ? ShipAllVort(server, gameUser.AccountId) : ShipAllDev(server, gameUser.AccountId);
+                    string data = ShipAllVort(server, gameUser.AccountId);
                     if (string.IsNullOrEmpty(data))
                     {
                         return gameUser;
                     }
-                    Dictionary<string, string> map = new Dictionary<string, string>();
-                    map.Add("accountId", gameUser.AccountId.ToString());
-                    map.Add("server",server);
-                    map.Add("userName",gameUser.UserName);
-                    map.Add("shipId",vehicles.ShipId.ToString());
-                    map.Add("data", Convert.ToBase64String(GzipUtils.Compress(Encoding.UTF8.GetBytes(data))));
-                    string result = WowsJsonStatus(PostJson(HOME + "/public/wows/parse/ship/all", map));
-                    if (!string.IsNullOrEmpty(result))
-                    {
-                        gameUser = JsonConvert.DeserializeObject<GameUser>(result);
-                    }
+                    /* Dictionary<string, string> map = new Dictionary<string, string>();
+                     map.Add("accountId", gameUser.AccountId.ToString());
+                     map.Add("server",server);
+                     map.Add("userName",gameUser.UserName);
+                     map.Add("shipId",vehicles.ShipId.ToString());
+                     map.Add("data", Convert.ToBase64String(GzipUtils.Compress(Encoding.UTF8.GetBytes(data))));
+                     string result = WowsJsonStatus(PostJson(HOME + "/public/wows/parse/ship/all", map));
+                     if (!string.IsNullOrEmpty(result))
+                     {
+                         gameUser = JsonConvert.DeserializeObject<GameUser>(result);
+                     }*/
+                    GameUser guTem = ApiShipAll.All(vehicles.ShipId,data, gameUser.AccountId);
                     if (clanUser != null)
                     {
                         gameUser.ClanTag = clanUser.Tag;
                         gameUser.ClanColor = clanUser.ColorRgb;
                     }
+                    gameUser.Pvp = guTem.Pvp;
+                    gameUser.Ship = guTem.Ship;
                 }
                 catch (Exception ex)
                 {
@@ -93,6 +102,20 @@ namespace YuyukoRecord.game
                 return token["data"].ToString();
             }
             return null;
+        }
+
+        public static string EsyGet(string url)
+        {
+            /*var http = new HttpClient();
+            http.Request.Accept = HttpContentTypes.ApplicationJson;
+            http.Request.Host = HttpHost(url);
+            http.Get(url);
+            return http.Response.RawText;*/
+            var client = new RestClient(url);
+            //client.Timeout = -1;
+            var request = new RestRequest();
+            var response = client.Get(request);
+            return response.Content;
         }
 
         public static string Get(string url)
@@ -237,10 +260,10 @@ namespace YuyukoRecord.game
 
         private static string ShipAllVort(string server, long accountId)
         {
-            string url = Url(server).Replace("api", "vortex") + VORTEX_SHIP + accountId + "/ships/";
+            string url = Url(server).Replace("api", "vortex") + VORTEX_SHIP + accountId + "/ships/pvp";
             try
             {
-                return Get(url);
+                return EsyGet(url);
             }catch (Exception ex)
             {
                 log.Error(accountId + " 请求vortex ship失败 server=" + server + " error=" + ex);

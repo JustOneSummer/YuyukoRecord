@@ -67,7 +67,7 @@ namespace YuyukoRecord.local
                 {
                     log.Info(server + " 查询用户=" + m.Name);
                     //查询
-                    Put(WowsHttp.ShinoAki(server, m));
+                    Put(WowsHttp.ShinoAki("asia", m));
                 });
             }));
         

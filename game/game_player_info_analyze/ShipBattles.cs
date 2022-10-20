@@ -65,7 +65,7 @@ namespace YuyukoRecord.game.game_player_info_analyze
             {
                 return info;
             }
-            info.Battles = token["battles_count"].Value<long>();
+            info.Battles = token["battles_count"].Value<int>();
             info.Wins = token["wins"].Value<long>();
             info.SurvivedBattles = token["survived"].Value<long>();
             info.Damage = token["damage_dealt"].Value<long>();

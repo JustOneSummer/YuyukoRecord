@@ -77,6 +77,14 @@ namespace YuyukoRecord
                 //弹窗提示选择游戏安装路径
                 SetGamePathToolStripMenuItem_Click(sender, null);
             }
+            string path = SourcesLoad.LoadGamePath() + "replays";
+            if (!Directory.Exists(path))
+            {
+                log.Error("replays 文件夹不存在！");
+                //弹窗提示选择游戏安装路径
+                SetGamePathToolStripMenuItem_Click(sender, null);
+                return;
+            }
             CheckUpdate();
             buttonLoadServer_Click(sender, null);
             //if (!string.IsNullOrEmpty(SourcesLoad.LoadGamePath()))
